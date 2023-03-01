@@ -71,11 +71,6 @@ int main()
 
         for (i = ind_first_num_elm + 2; a[i] != ','; i++) {
             if (error == 0) {
-                if (a[i] == 0) {
-                    error = 1;
-                    printf("Error at column %d: '<double>'\n", i);
-                    break;
-                }
                 if (a[i] == ')') {
                     error = 1;
                     printf("Error at column %d: expected ',' and '<double>'\n",
@@ -96,7 +91,7 @@ int main()
         for (i = ind_second_num_elm + 3; i < ind_close_bracket; i++) {
             if (error == 0) {
                 if (isdigit(a[i]) == 0 && a[i] != '.') {
-                    if (a[i] == ')' || a[i] == '(' || a[i] == ' ') {
+                    if ((a[i] == ')' || a[i] == '(' || a[i] == ' ') || a[i]=='0') {
                         break;
                     }
                     error = 1;
