@@ -10,10 +10,6 @@ int main()
 
     file1 = fopen("test.txt", "r");
 
-    if (!file1) {
-        printf("Error: cannot open file. Check name of file\n");
-    }
-
     int i, ind_open_bracket = 0, ind_close_bracket = 0, ind_last_num_elm = 0,
            ind_first_num_elm = 0, ind_second_num_elm = 0;
     int l = 0, c = 0, e = 0, error = 0;
@@ -75,6 +71,11 @@ int main()
 
         for (i = ind_first_num_elm + 2; a[i] != ','; i++) {
             if (error == 0) {
+                if (a[i] == 0) {
+                    error = 1;
+                    printf("Error at column %d: '<double>'\n", i);
+                    break;
+                }
                 if (a[i] == ')') {
                     error = 1;
                     printf("Error at column %d: expected ',' and '<double>'\n",
