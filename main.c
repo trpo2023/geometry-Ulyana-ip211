@@ -90,8 +90,8 @@ int main()
 
         for (i = ind_second_num_elm + 3; i < ind_close_bracket; i++) {
             if (error == 0) {
-                if (isdigit(a[i]) == 0 && a[i] != '.') {
-                    if ((a[i] == ')' || a[i] == '(' || a[i] == ' ') || a[i]=='0') {
+                if ((isdigit(a[i]) == 0 && a[i] != '.') || a[i]=='0') {
+                    if (a[i] == ')' || a[i] == '(' || a[i] == ' ') {
                         break;
                     }
                     error = 1;
@@ -136,7 +136,7 @@ int main()
         }
 
         if (error == 0) {
-            printf("No Errors!\n");
+            printf("No Errors\n");
         }
 
         error = 0;
