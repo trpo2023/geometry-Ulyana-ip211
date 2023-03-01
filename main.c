@@ -144,7 +144,6 @@ int main()
         }
 
         error = 0;
-        printf("\n");
     }
     return 0;
 }
