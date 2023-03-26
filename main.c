@@ -9,6 +9,9 @@ int main()
     FILE* file;
 
     file1 = fopen("test.txt", "r");
+    if (file1 != 0) 
+        printf("Error: connot open file, check name of file \n");   
+    
 
     int i, ind_open_bracket = 0, ind_close_bracket = 0, ind_last_num_elm = 0,
            ind_first_num_elm = 0, ind_second_num_elm = 0;
@@ -28,6 +31,9 @@ int main()
 
     char a[l], b[6] = "circle";
     file = fopen("test.txt", "r");
+    if (file != 0) 
+        printf("Error: connot open file, check name of file \n");   
+    
     while (fgets(a, l + 1, file)) {
         printf("%s", a);
 
