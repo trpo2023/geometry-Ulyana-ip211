@@ -1,9 +1,27 @@
+#include <ctype.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include <libgeometry/check.h>
+
+#define _USE_MATH_DEFINE_
+
+void calculation(char* a)
+{
+    char ignore[] = "circle( ,)";
+    float x, y, R, per, area;
+
+    x = atof(strtok(a, ignore));
+    y = atof(strtok(NULL, ignore));
+    R = atof(strtok(NULL, ignore));
+    per = 2 * M_PI * R;
+    area = M_PI * R * R;
+
+    printf("x = %.3f   y = %.3f   R = %.3f\n", x, y, R);
+    printf("perimetr = %.3f\narea = %.3f\n\n", per, area);
+}
 
 int main()
 {
@@ -60,7 +78,7 @@ int main()
         check_unexp_token(a, l, &ind_close_bracket, &error);
 
         if (error == 0) {
-            printf("No Errors\n");
+            calculation(a);
         }
 
         error = 0;
