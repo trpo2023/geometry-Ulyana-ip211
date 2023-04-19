@@ -1,4 +1,4 @@
-#include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,9 +10,12 @@ int main()
     FILE* file1;
     FILE* file;
 
-    file1 = fopen("test.txt", "r");
-    if (file1 != 0)
-        printf("Error: can't open file, check name of file \n");
+    file1 = fopen("geometry.txt", "r");
+
+    if (!file1) {
+        printf("Error: can't open file. Check name of file\n");
+        return 0;
+    }
 
     int ind_open_bracket = 0, ind_close_bracket = 0, ind_last_num_elm = 0,
         ind_first_num_elm = 0, ind_second_num_elm = 0;
@@ -31,9 +34,7 @@ int main()
     fclose(file1);
 
     char a[l], b[6] = "circle";
-    file = fopen("test.txt", "r");
-    if (file != 0)
-        printf("Error: can't open file, check name of file \n");
+    file = fopen("geometry.txt", "r");
 
     while (fgets(a, l + 1, file)) {
         printf("%s", a);
