@@ -1,6 +1,4 @@
 circle(1.0 2, 5)
+circle(5 4.1, 4)
+circle(8 2.7, 6)
 ccircle(45 8, 3.14)
-circle(x1 2.5, 5)
-circle(16 23, 0)
-circle(6 14, 4(
-circle(16 1.8, 82.1) 587s
