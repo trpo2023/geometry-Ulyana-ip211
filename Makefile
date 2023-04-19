@@ -36,12 +36,12 @@ $(LIB_PATH): $(LIB_OBJECTS)
 $(OBJ_DIR)/%.o: %.c
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 
-.PHONY: run
-
 .PHONY: clean
-
-run:
-	./bin/geometry
 
 clean:
 	$(RM) $(APP_PATH) $(OBJ_DIR)/*/*/*.[od]
+
+.PHONY: run
+
+run:
+	./bin/geometry
