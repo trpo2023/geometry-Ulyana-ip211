@@ -1,4 +1,4 @@
 circle(9 1, 2)
-circle(9 2, 4)
-circle(3 5, 8)
+circle(6 1, 2)
+circle(3 1, 8)
 ccircle(45 8, 3.14)
