@@ -1,6 +1,6 @@
 int check_str(char* a, char* b, int* open_bracket, int* error);
 
-int checkcheck_find_close_bracket(char* a, int l, int* close_bracket);
+int check_find_close_bracket(char* a, int l, int* close_bracket);
 
 int check_first_num(char* a, int* open_bracket, int* error, int* first_num_elm);
 
