@@ -83,7 +83,7 @@ CTEST(input_check, first_num_correct)
     int open_bracket = 6;
     int error = 0;
     int expected = 7;
-    first_num_elm = 0;
+    int first_num_elm = 0;
     int real = check_first_num(a, &open_bracket, &error, &first_num_elm);
 
     ASSERT_EQUAL(expected, real);
@@ -95,7 +95,7 @@ CTEST(input_check, first_num_error)
     int open_bracket = 6;
     int error = 0;
     int expected = 1;
-    first_num_elm = 0;
+    int first_num_elm = 0;
     check_first_num(a, &open_bracket, &error, &first_num_elm);
     int real = error;
 
