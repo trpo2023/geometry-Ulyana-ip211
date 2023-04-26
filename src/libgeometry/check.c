@@ -101,9 +101,9 @@ int check_last_num(char* a, int* second_num_elm, int* close_bracket, int* error)
     return last_num_elm;
 }
 
-int check_close_bracket(
-        char* a, int l, int* last_num_elm, int* error, int* close_bracket)
+int check_close_bracket(char* a, int l, int* last_num_elm, int* error)
 {
+    int close_bracket = 0;
     for (int i = *last_num_elm + 1; i < l; i++) {
         if (*error == 0) {
             if (a[i] != ')') {
@@ -111,7 +111,7 @@ int check_close_bracket(
                 printf("Error at column %d: expected ')'\n", i);
                 break;
             } else {
-                *close_bracket = i;
+                close_bracket = i;
                 break;
             }
         } else {
