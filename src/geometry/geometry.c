@@ -6,7 +6,7 @@
 
 #include <libgeometry/check.h>
 
-#define _USE_MATH_DEFINE_
+#define _USE_MATH_DEFINES
 
 void calculation(
         char* a,
@@ -66,8 +66,8 @@ int main()
         return 0;
     }
 
-    int open_bracket = 0, close_bracket = 0, first_num_elm = 0,
-        second_num_elm = 0, last_num_elm = 0;
+    // int open_bracket = 0, close_bracket = 0, first_num_elm = 0,
+    //     second_num_elm = 0, last_num_elm = 0;
     int l = 0, c = 0, e = 0, error = 0, i = 0;
 
     float* x = (float*)malloc(i * sizeof(float));
@@ -93,18 +93,19 @@ int main()
     while (fgets(a, l + 1, file)) {
         printf("%d. %s", number, a);
 
-        check_str(a, b, &open_bracket, &error);
+        int open_bracket = check_str(a, b, &error);
 
-        check_find_close_bracket(a, l, &close_bracket);
+        int close_bracket = check_find_close_bracket(a, l);
 
-        check_first_num(a, &open_bracket, &error, &first_num_elm);
+        int first_num_elm = check_first_num(a, &open_bracket, &error);
 
-        check_second_num(a, &first_num_elm, &second_num_elm, &error);
+        int second_num_elm = check_second_num(a, &first_num_elm, &error);
 
-        check_last_num(
-                a, &second_num_elm, &close_bracket, &error, &last_num_elm);
+        int last_num_elm
+                = check_last_num(a, &second_num_elm, &close_bracket, &error);
 
-        check_close_bracket(a, l, &last_num_elm, &error, &close_bracket);
+        close_bracket = check_close_bracket(
+                a, l, &last_num_elm, &error, &close_bracket);
 
         check_unexp_token(a, l, &close_bracket, &error);
 
