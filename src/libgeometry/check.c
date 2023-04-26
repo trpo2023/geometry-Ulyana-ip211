@@ -26,7 +26,7 @@ int check_find_close_bracket(char* a, int* l)
         if (a[i] == ')') {
             close_bracket = i;
         } else {
-            close_bracket = *l - 1;
+            close_bracket = 0;
         }
     }
     return close_bracket;
