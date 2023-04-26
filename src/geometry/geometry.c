@@ -104,8 +104,7 @@ int main()
         int last_num_elm
                 = check_last_num(a, &second_num_elm, &close_bracket, &error);
 
-        close_bracket = check_close_bracket(
-                a, l, &last_num_elm, &error, &close_bracket);
+        close_bracket = check_close_bracket(a, l, &last_num_elm, &error);
 
         check_unexp_token(a, l, &close_bracket, &error);
 
