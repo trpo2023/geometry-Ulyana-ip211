@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void check_str(char* a, char* b, int* open_bracket, int* error)
+int check_str(char* a, char* b, int* open_bracket, int* error)
 {
     for (int i = 0; i < 7; i++) {
         if (a[i] != b[i] && i < 6) {
@@ -17,7 +17,7 @@ void check_str(char* a, char* b, int* open_bracket, int* error)
     }
 }
 
-void check_find_close_bracket(char* a, int l, int* close_bracket)
+int check_find_close_bracket(char* a, int l, int* close_bracket)
 {
     for (int i = 0; i < l; i++) {
         if (a[i] == ')') {
@@ -28,7 +28,7 @@ void check_find_close_bracket(char* a, int l, int* close_bracket)
     }
 }
 
-void check_first_num(char* a, int* open_bracket, int* error, int* first_num_elm)
+int check_first_num(char* a, int* open_bracket, int* error, int* first_num_elm)
 {
     for (int i = *open_bracket + 1; a[i] != ' '; i++) {
         if (*error == 0) {
@@ -51,7 +51,7 @@ void check_first_num(char* a, int* open_bracket, int* error, int* first_num_elm)
     }
 }
 
-void check_second_num(
+int check_second_num(
         char* a, int* first_num_elm, int* second_num_elm, int* error)
 {
     for (int i = *first_num_elm + 2; a[i] != ','; i++) {
@@ -73,7 +73,7 @@ void check_second_num(
     }
 }
 
-void check_last_num(
+int check_last_num(
         char* a,
         int* second_num_elm,
         int* close_bracket,
@@ -97,7 +97,7 @@ void check_last_num(
     }
 }
 
-void check_close_bracket(
+int check_close_bracket(
         char* a, int l, int* last_num_elm, int* error, int* close_bracket)
 {
     for (int i = *last_num_elm + 1; i < l; i++) {
@@ -116,7 +116,7 @@ void check_close_bracket(
     }
 }
 
-void check_unexp_token(char* a, int l, int* close_bracket, int* error)
+int check_unexp_token(char* a, int l, int* close_bracket, int* error)
 {
     for (int i = *close_bracket + 1; i < l; i++) {
         if (*error == 0) {
