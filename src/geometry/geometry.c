@@ -8,19 +8,50 @@
 
 #define _USE_MATH_DEFINE_
 
-void calculation(char* a)
+void calculation(
+        char* a,
+        float* xx,
+        float* yy,
+        float* RR,
+        float* x,
+        float* y,
+        float* R,
+        int i)
 {
     char ignore[] = "circle( ,)";
-    float x, y, R, per, area;
+    float per, area;
 
-    x = atof(strtok(a, ignore));
-    y = atof(strtok(NULL, ignore));
-    R = atof(strtok(NULL, ignore));
-    per = 2 * M_PI * R;
-    area = M_PI * R * R;
+    *xx = atof(strtok(a, ignore));
+    *yy = atof(strtok(NULL, ignore));
+    *RR = atof(strtok(NULL, ignore));
 
-    printf("x = %.3f   y = %.3f   R = %.3f\n", x, y, R);
-    printf("perimetr = %.3f\narea = %.3f\n\n", per, area);
+    x[i] = *xx;
+    y[i] = *yy;
+    R[i] = *R;
+
+    per = 2 * M_PI * *RR;
+    area = M_PI * *RR * *RR;
+
+    printf("x = %.2f   y = %.2f   R = %.2f\n", *xx, *yy, *RR);
+    printf("perimetr = %.2f\narea = %.2f\n\n", per, area);
+}
+
+void intersections(float* x, float* y, float* R, int number)
+{
+    printf("\nintersects: \n");
+    for (int i = 0; i < number; i++) {
+        printf("\ncircle %d intersects circle(s) ", i);
+        for (int j = 0; j < number; j++) {
+            double distance = sqrt(pow(x[j] - x[i], 2) + pow(y[j] - y[i], 2));
+            if (R[i] + R[j] >= distance && R[i] + distance >= R[j]
+                && distance + R[j] >= R[i] && j != i) {
+                printf("%d ", j);
+                if (distance == 0 && R[i] == R[j] && j != i) {
+                    printf("%d ", j);
+                }
+            }
+        }
+    }
 }
 
 int main()
@@ -35,9 +66,13 @@ int main()
         return 0;
     }
 
-    int ind_open_bracket = 0, ind_close_bracket = 0, ind_last_num_elm = 0,
-        ind_first_num_elm = 0, ind_second_num_elm = 0;
-    int l = 0, c = 0, e = 0, error = 0;
+    int open_bracket = 0, close_bracket = 0, first_num_elm = 0,
+        second_num_elm = 0, last_num_elm = 0;
+    int l = 0, c = 0, e = 0, error = 0, i = 0;
+
+    float* x = (float*)malloc(i * sizeof(float));
+    float* y = (float*)malloc(i * sizeof(float));
+    float* R = (float*)malloc(i * sizeof(float));
 
     while (1) {
         e = fgetc(file1);
@@ -51,37 +86,42 @@ int main()
     l = c;
     fclose(file1);
 
+    int number = 1;
     char a[l], b[6] = "circle";
     file = fopen("geometry.txt", "r");
 
     while (fgets(a, l + 1, file)) {
-        printf("%s", a);
+        printf("%d. %s", number, a);
 
-        check_str(a, b, &ind_open_bracket, &error);
+        check_str(a, b, &open_bracket, &error);
 
-        check_open_bracket(a, l, &ind_close_bracket);
+        check_find_close_bracket(a, l, &close_bracket);
 
-        check_first_num(a, &ind_open_bracket, &error, &ind_first_num_elm);
+        check_first_num(a, &open_bracket, &error, &first_num_elm);
 
-        check_second_num(a, &ind_first_num_elm, &ind_second_num_elm, &error);
+        check_second_num(a, &first_num_elm, &second_num_elm, &error);
 
         check_last_num(
-                a,
-                &ind_second_num_elm,
-                &ind_close_bracket,
-                &error,
-                &ind_last_num_elm);
+                a, &second_num_elm, &close_bracket, &error, &last_num_elm);
 
-        check_close_bracket(
-                a, l, &ind_last_num_elm, &error, &ind_close_bracket);
+        check_close_bracket(a, l, &last_num_elm, &error, &close_bracket);
 
-        check_unexp_token(a, l, &ind_close_bracket, &error);
+        check_unexp_token(a, l, &close_bracket, &error);
 
         if (error == 0) {
-            calculation(a);
+            float xx = 0, yy = 0, RR = 0;
+            calculation(a, &xx, &yy, &RR, x, y, R, i);
+            i++;
         }
 
         error = 0;
+        number++;
     }
+
+    intersections(x, y, R, number);
+    free(x);
+    free(y);
+    free(R);
+
     return 0;
 }
