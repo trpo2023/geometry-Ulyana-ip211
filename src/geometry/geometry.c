@@ -38,19 +38,27 @@ void calculation(
 
 void intersections(float* x, float* y, float* R, int number)
 {
-    printf("\nIntersects: \n");
+    int inter;
+    printf("\nIntersects:");
     for (int i = 0; i < number; i++) {
-        printf("\n  circle %d intersects: ", i);
+        inter = 0;
+        printf("\n circle %d intersects: ", i + 1);
         for (int j = 0; j < number; j++) {
             double distance = sqrt(pow(x[j] - x[i], 2) + pow(y[j] - y[i], 2));
+
+            if (distance == 0 && R[i] == R[j] && j != i) {
+                inter++;
+                printf("%d  ", j + 1);
+            }
             if (R[i] + R[j] >= distance && R[i] + distance >= R[j]
                 && distance + R[j] >= R[i] && j != i) {
-                printf("circle %d ", j);
-                if (distance == 0 && R[i] == R[j] && j != i) {
-                    printf("circle %d ", j);
-                }
+                inter++;
+                printf("%d  ", j + 1);
             }
         }
+    }
+    if (inter == 0) {
+        printf("no intersects");
     }
 }
 
@@ -66,8 +74,6 @@ int main()
         return 0;
     }
 
-    // int open_bracket = 0, close_bracket = 0, first_num_elm = 0,
-    //     second_num_elm = 0, last_num_elm = 0;
     int l = 0, c = 0, e = 0, error = 0, i = 0;
 
     float* x = (float*)malloc(i * sizeof(float));
@@ -118,7 +124,7 @@ int main()
         number++;
     }
 
-    intersections(x, y, R, number);
+    intersections(x, y, R, i);
     free(x);
     free(y);
     free(R);
