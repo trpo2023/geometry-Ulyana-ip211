@@ -1,13 +1,12 @@
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "../src/libgeometry/check.h"
 #include "../thirdparty/ctest.h"
 
 #define _USE_MATH_DEFINES
-
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 CTEST(input_check, str_correct)
 {
