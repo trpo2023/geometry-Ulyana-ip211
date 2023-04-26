@@ -1,14 +1,15 @@
 APP_NAME = geometry
 LIB_NAME = libgeometry
-TEST_NAME = parser_test
+TEST_NAME = test
 
 BIN_DIR = bin
 OBJ_DIR = obj
 SRC_DIR = src
 TEST_DIR = test
+OBJ_DIR_SRC = obj/src
+OBJ_DIR_TEST = obj/test
 
 CC = gcc
-
 CFLAGS = -Wall -Werror
 CPPFLAGS = -I src -MD -MMD
 
@@ -34,7 +35,7 @@ all: $(APP_PATH)
 -include $(DEPS)
 
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@ -lm
 
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
@@ -49,9 +50,15 @@ $(OBJ_DIR)/%.o: %.c
 .PHONY: test
 
 clean:
-	$(RM) $(APP_PATH) $(OBJ_DIR)/*/*/*.[od]
+	$(RM) obj/src/libgeometry/*.o
+	$(RM) obj/src/geometry/*.o
+	$(RM) obj/test/*.o
+	$(RM) obj/test/*.d
+	$(RM) $(BIN_DIR)/*.exe
+	$(RM) $(BIN_DIR)/.exe
 
 run:
+	./bin/$(TEST_NAME)
 	./bin/geometry
 
 test: $(TEST_PATH)
