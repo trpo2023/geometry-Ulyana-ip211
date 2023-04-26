@@ -38,16 +38,16 @@ void calculation(
 
 void intersections(float* x, float* y, float* R, int number)
 {
-    printf("\nintersects: \n");
+    printf("\nIntersects: \n");
     for (int i = 0; i < number; i++) {
-        printf("\ncircle %d intersects circle(s) ", i);
+        printf("\n  circle %d intersects: ", i);
         for (int j = 0; j < number; j++) {
             double distance = sqrt(pow(x[j] - x[i], 2) + pow(y[j] - y[i], 2));
             if (R[i] + R[j] >= distance && R[i] + distance >= R[j]
                 && distance + R[j] >= R[i] && j != i) {
-                printf("%d ", j);
+                printf("circle %d ", j);
                 if (distance == 0 && R[i] == R[j] && j != i) {
-                    printf("%d ", j);
+                    printf("circle %d ", j);
                 }
             }
         }
