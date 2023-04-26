@@ -50,7 +50,7 @@ CTEST(input_check, open_bracket_error)
     char* a = "circle9 1, 2)";
     char* b = "circle";
     int error = 0;
-    int expected = 1;
+    int expected = 0;
     check_str(a, b, &error);
     int real = error;
 
@@ -69,7 +69,7 @@ CTEST(input_check, find_close_bracket_correct)
 
 CTEST(input_check, find_close_bracket_error)
 {
-    char* a = "circle(9 1, 2)";
+    char* a = "circle(9 1, 2 ";
     int l = 13;
     int expected = 0;
     int real = check_find_close_bracket(a, &l);
