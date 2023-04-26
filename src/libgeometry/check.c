@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void check_str(char* a, char* b, int* ind_open_bracket, int* error)
+void check_str(char* a, char* b, int* open_bracket, int* error)
 {
     for (int i = 0; i < 7; i++) {
         if (a[i] != b[i] && i < 6) {
@@ -13,25 +13,24 @@ void check_str(char* a, char* b, int* ind_open_bracket, int* error)
             break;
             ;
         }
-        *ind_open_bracket = i;
+        *open_bracket = i;
     }
 }
 
-void check_open_bracket(char* a, int l, int* ind_close_bracket)
+void check_find_close_bracket(char* a, int l, int* close_bracket)
 {
     for (int i = 0; i < l; i++) {
         if (a[i] == ')') {
-            *ind_close_bracket = i;
+            *close_bracket = i;
         } else {
-            *ind_close_bracket = l - 1;
+            *close_bracket = l - 1;
         }
     }
 }
 
-void check_first_num(
-        char* a, int* ind_open_bracket, int* error, int* ind_first_num_elm)
+void check_first_num(char* a, int* open_bracket, int* error, int* first_num_elm)
 {
-    for (int i = *ind_open_bracket + 1; a[i] != ' '; i++) {
+    for (int i = *open_bracket + 1; a[i] != ' '; i++) {
         if (*error == 0) {
             if (a[i] == ',') {
                 *error = 1;
@@ -45,7 +44,7 @@ void check_first_num(
                 printf("Error at column %d: expected '<double>'\n", i);
                 break;
             }
-            *ind_first_num_elm = i;
+            *first_num_elm = i;
         } else {
             break;
         }
@@ -53,9 +52,9 @@ void check_first_num(
 }
 
 void check_second_num(
-        char* a, int* ind_first_num_elm, int* ind_second_num_elm, int* error)
+        char* a, int* first_num_elm, int* second_num_elm, int* error)
 {
-    for (int i = *ind_first_num_elm + 2; a[i] != ','; i++) {
+    for (int i = *first_num_elm + 2; a[i] != ','; i++) {
         if (*error == 0) {
             if (a[i] == ')') {
                 *error = 1;
@@ -67,7 +66,7 @@ void check_second_num(
                 printf("Error at column %d: expected '<double>'\n", i);
                 break;
             }
-            *ind_second_num_elm = i;
+            *second_num_elm = i;
         } else {
             break;
         }
@@ -76,12 +75,12 @@ void check_second_num(
 
 void check_last_num(
         char* a,
-        int* ind_second_num_elm,
-        int* ind_close_bracket,
+        int* second_num_elm,
+        int* close_bracket,
         int* error,
-        int* ind_last_num_elm)
+        int* last_num_elm)
 {
-    for (int i = *ind_second_num_elm + 3; i < *ind_close_bracket; i++) {
+    for (int i = *second_num_elm + 3; i < *close_bracket; i++) {
         if (*error == 0) {
             if ((isdigit(a[i]) == 0 && a[i] != '.') || a[i] == '0') {
                 if (a[i] == ')' || a[i] == '(' || a[i] == ' ') {
@@ -91,7 +90,7 @@ void check_last_num(
                 printf("Error at column %d: expected '<double>'\n", i);
                 break;
             }
-            *ind_last_num_elm = i;
+            *last_num_elm = i;
         } else {
             break;
         }
@@ -99,20 +98,16 @@ void check_last_num(
 }
 
 void check_close_bracket(
-        char* a,
-        int l,
-        int* ind_last_num_elm,
-        int* error,
-        int* ind_close_bracket)
+        char* a, int l, int* last_num_elm, int* error, int* close_bracket)
 {
-    for (int i = *ind_last_num_elm + 1; i < l; i++) {
+    for (int i = *last_num_elm + 1; i < l; i++) {
         if (*error == 0) {
             if (a[i] != ')') {
                 *error = 1;
                 printf("Error at column %d: expected ')'\n", i);
                 break;
             } else {
-                *ind_close_bracket = i;
+                *close_bracket = i;
                 break;
             }
         } else {
@@ -121,9 +116,9 @@ void check_close_bracket(
     }
 }
 
-void check_unexp_token(char* a, int l, int* ind_close_bracket, int* error)
+void check_unexp_token(char* a, int l, int* close_bracket, int* error)
 {
-    for (int i = *ind_close_bracket + 1; i < l; i++) {
+    for (int i = *close_bracket + 1; i < l; i++) {
         if (*error == 0) {
             if (a[i] == '\n') {
                 break;
