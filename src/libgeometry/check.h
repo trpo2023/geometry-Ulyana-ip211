@@ -9,7 +9,6 @@ int check_second_num(char* a, int* first_num_elm, int* error);
 int check_last_num(
         char* a, int* second_num_elm, int* close_bracket, int* error);
 
-int check_close_bracket(
-        char* a, int l, int* last_num_elm, int* error, int* close_bracket);
+int check_close_bracket(char* a, int l, int* last_num_elm, int* error);
 
 int check_unexp_token(char* a, int l, int* close_bracket, int* error);
