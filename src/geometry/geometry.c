@@ -60,6 +60,7 @@ void intersections(float* x, float* y, float* R, int number)
     if (inter == 0) {
         printf("no intersects");
     }
+    printf("\n");
 }
 
 int main()
@@ -101,7 +102,7 @@ int main()
 
         int open_bracket = check_str(a, b, &error);
 
-        int close_bracket = check_find_close_bracket(a, l);
+        int close_bracket = check_find_close_bracket(a, &l);
 
         int first_num_elm = check_first_num(a, &open_bracket, &error);
 
@@ -110,9 +111,9 @@ int main()
         int last_num_elm
                 = check_last_num(a, &second_num_elm, &close_bracket, &error);
 
-        close_bracket = check_close_bracket(a, l, &last_num_elm, &error);
+        close_bracket = check_close_bracket(a, &l, &last_num_elm, &error);
 
-        check_unexp_token(a, l, &close_bracket, &error);
+        check_unexp_token(a, &l, &close_bracket, &error);
 
         if (error == 0) {
             float xx = 0, yy = 0, RR = 0;
