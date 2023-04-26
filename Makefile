@@ -6,8 +6,6 @@ BIN_DIR = bin
 OBJ_DIR = obj
 SRC_DIR = src
 TEST_DIR = test
-OBJ_DIR_SRC = obj/src
-OBJ_DIR_TEST = obj/test
 
 CC = gcc
 CFLAGS = -Wall -Werror
@@ -15,7 +13,7 @@ CPPFLAGS = -I src -MD -MMD
 
 APP_PATH = $(BIN_DIR)/$(APP_NAME)
 LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).o
-TEST_PATH = $(BIN_DIR)/&(TEST_NAME)
+TEST_PATH = $(BIN_DIR)/$(TEST_NAME)
 
 SRC_EXT = c
 
@@ -58,7 +56,7 @@ clean:
 	$(RM) $(BIN_DIR)/.exe
 
 run:
-	./bin/$(TEST_NAME)
+	./$(TEST_PATH)
 	./bin/geometry
 
 test: $(TEST_PATH)
