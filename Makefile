@@ -12,7 +12,7 @@ CFLAGS = -Wall -Werror
 CPPFLAGS = -I src -MD -MMD
 
 APP_PATH = $(BIN_DIR)/$(APP_NAME)
-LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).o
+LIB_PATH = $(OBJ_DIR)/$(SRC_DIR)/$(LIB_NAME)/$(LIB_NAME).a
 TEST_PATH = $(BIN_DIR)/$(TEST_NAME)
 
 SRC_EXT = c
@@ -53,7 +53,6 @@ clean:
 	$(RM) obj/test/*.o
 	$(RM) obj/test/*.d
 	$(RM) $(BIN_DIR)/*.exe
-	$(RM) $(BIN_DIR)/.exe
 
 run:
 	./$(TEST_PATH)
@@ -63,3 +62,4 @@ test: $(TEST_PATH)
 
 $(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH)
 	$(CC) $(CFLAGS) $(CPPFLAGS) $^ -o $@
+	./$(TEST_PATH)
