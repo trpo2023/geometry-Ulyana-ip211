@@ -1,25 +1,14 @@
-void check_str(char* a, char* b, int* ind_open_bracket, int* error);
+int check_str(char* a, char* b, int* error);
 
-void check_open_bracket(char* a, int l, int* ind_close_bracket);
+int check_find_close_bracket(char* a, int* l);
 
-void check_first_num(
-        char* a, int* ind_open_bracket, int* error, int* ind_first_num_elm);
+int check_first_num(char* a, int* open_bracket, int* error);
 
-void check_second_num(
-        char* a, int* ind_first_num_elm, int* ind_second_num_elm, int* error);
+int check_second_num(char* a, int* first_num_elm, int* error);
 
-void check_last_num(
-        char* a,
-        int* ind_second_num_elm,
-        int* ind_close_bracket,
-        int* error,
-        int* ind_last_num_elm);
+int check_last_num(
+        char* a, int* second_num_elm, int* close_bracket, int* error);
 
-void check_close_bracket(
-        char* a,
-        int l,
-        int* ind_last_num_elm,
-        int* error,
-        int* ind_close_bracket);
+int check_close_bracket(char* a, int* l, int* last_num_elm, int* error);
 
-void check_unexp_token(char* a, int l, int* ind_close_bracket, int* error);
+int check_unexp_token(char* a, int* l, int* close_bracket, int* error);
