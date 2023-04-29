@@ -56,7 +56,7 @@ clean:
 
 run:
 	./$(TEST_PATH)
-	./bin/geometry
+	./$(APP_PATH)
 
 test: $(TEST_PATH)
 
